@@ -16,9 +16,9 @@ WordQuest is a polished browser-based word search puzzle game built with plain H
 
 ## Levels
 
--EASY — 8*8 ( Short Words)
--MEDIUM — 10*10 ( Mixed Words)
--Hard — 12*12 ( Long Words)
+1. EASY — 8*8 ( Short Words)
+2. MEDIUM — 10*10 ( Mixed Words)
+3. Hard — 12*12 ( Long Words)
 
 ## Files
 
