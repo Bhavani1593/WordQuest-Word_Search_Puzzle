@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WordQuest – Word Search Puzzle</title>
+  <link rel="stylesheet" href="word_style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       DAILY REWARD POPUP
+  ═══════════════════════════════════════════ -->
+  <div id="daily-reward-overlay" class="overlay hidden">
+    <div class="popup popup--reward">
+      <div class="popup__icon">🎁</div>
+      <h2 class="popup__title">Daily Reward!</h2>
+      <p class="popup__sub" id="daily-streak-text">Day 1 Streak</p>
+      <div class="reward-coins">
+        <span class="coin-icon">🪙</span>
+        <span id="daily-reward-amount">+50</span>
+      </div>
+      <p class="popup__note">Come back tomorrow for more!</p>
+      <button class="btn btn--primary" id="claim-reward-btn">Claim Reward</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       LEVEL COMPLETE POPUP
+  ═══════════════════════════════════════════ -->
+  <div id="level-complete-overlay" class="overlay hidden">
+    <div class="popup popup--success">
+      <div class="popup__icon">🏆</div>
+      <h2 class="popup__title">Level Complete!</h2>
+      <div class="popup-stats">
+        <div class="popup-stat">
+          <span class="popup-stat__label">Score</span>
+          <span class="popup-stat__val" id="popup-score">0</span>
+        </div>
+        <div class="popup-stat">
+          <span class="popup-stat__label">Time</span>
+          <span class="popup-stat__val" id="popup-time">0s</span>
+        </div>
+        <div class="popup-stat">
+          <span class="popup-stat__label">Coins</span>
+          <span class="popup-stat__val" id="popup-coins">+0 🪙</span>
+        </div>
+      </div>
+      <button class="btn btn--primary" id="next-level-btn">Next Level →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       HINT CONFIRM POPUP
+  ═══════════════════════════════════════════ -->
+  <div id="hint-overlay" class="overlay hidden">
+    <div class="popup popup--hint">
+      <div class="popup__icon">💡</div>
+      <h2 class="popup__title">Use a Hint?</h2>
+      <p class="popup__sub">This will highlight a word for 3 seconds.</p>
+      <div class="reward-coins">
+        <span class="coin-icon">🪙</span>
+        <span>Costs 10 coins</span>
+      </div>
+      <div class="popup-btns">
+        <button class="btn btn--outline" id="hint-cancel-btn">Cancel</button>
+        <button class="btn btn--primary" id="hint-confirm-btn">Use Hint</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       DIFFICULTY SELECTION SCREEN
+  ═══════════════════════════════════════════ -->
+  <div id="difficulty-screen" class="screen">
+    <div class="screen__inner">
+      <div class="logo">
+        <span class="logo__word">WORD</span><span class="logo__quest">QUEST</span>
+      </div>
+      <p class="screen__tagline">Find words. Beat levels. Collect coins.</p>
+
+      <div class="difficulty-cards">
+        <button class="diff-card diff-card--easy" data-diff="easy">
+          <span class="diff-card__emoji">🌱</span>
+          <span class="diff-card__name">Easy</span>
+          <span class="diff-card__desc">8×8 grid · Short words</span>
+          <span class="diff-card__levels" id="easy-progress">Level 1</span>
+        </button>
+        <button class="diff-card diff-card--medium" data-diff="medium">
+          <span class="diff-card__emoji">🔥</span>
+          <span class="diff-card__name">Medium</span>
+          <span class="diff-card__desc">10×10 grid · Mixed words</span>
+          <span class="diff-card__levels" id="medium-progress">Level 1</span>
+        </button>
+        <button class="diff-card diff-card--hard" data-diff="hard">
+          <span class="diff-card__emoji">💀</span>
+          <span class="diff-card__name">Hard</span>
+          <span class="diff-card__desc">12×12 grid · Long words</span>
+          <span class="diff-card__levels" id="hard-progress">Level 1</span>
+        </button>
+      </div>
+
+      <div class="home-stats">
+        <div class="home-stat">
+          <span class="home-stat__icon">🪙</span>
+          <span class="home-stat__val" id="home-coins">0</span>
+          <span class="home-stat__label">Coins</span>
+        </div>
+        <div class="home-stat">
+          <span class="home-stat__icon">🏅</span>
+          <span class="home-stat__val" id="home-score">0</span>
+          <span class="home-stat__label">Total Score</span>
+        </div>
+        <div class="home-stat">
+          <span class="home-stat__icon">🔥</span>
+          <span class="home-stat__val" id="home-streak">0</span>
+          <span class="home-stat__label">Day Streak</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       GAME SCREEN
+  ═══════════════════════════════════════════ -->
+  <div id="game-screen" class="screen hidden">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <button class="topbar__btn" id="back-btn" title="Back to menu">←</button>
+      <div class="topbar__info">
+        <span class="topbar__diff" id="topbar-diff">Easy</span>
+        <span class="topbar__level" id="topbar-level">Level 1</span>
+      </div>
+      <div class="topbar__stats">
+        <div class="stat-pill">
+          <span>🪙</span><span id="stat-coins">0</span>
+        </div>
+        <div class="stat-pill">
+          <span>⭐</span><span id="stat-score">0</span>
+        </div>
+        <div class="stat-pill stat-pill--timer">
+          <span>⏱</span><span id="stat-timer">0:00</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN GAME AREA -->
+    <main class="game-area">
+
+      <!-- WORD LIST -->
+      <aside class="word-panel">
+        <h3 class="word-panel__title">Find These</h3>
+        <ul class="word-list" id="word-list"></ul>
+        <div class="word-panel__footer">
+          <span id="words-found">0</span>/<span id="words-total">0</span> found
+        </div>
+        <button class="btn btn--hint" id="hint-btn">💡 Hint <span class="hint-cost">(10🪙)</span></button>
+        <button class="btn btn--restart" id="restart-btn">↺ Restart</button>
+      </aside>
+
+      <!-- GRID -->
+      <section class="grid-wrap">
+        <div class="grid-container" id="grid-container"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Particle canvas for celebrations -->
+  <canvas id="particle-canvas"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
