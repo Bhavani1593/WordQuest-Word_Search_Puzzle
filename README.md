@@ -30,7 +30,7 @@ WordQuest is a polished browser-based word search puzzle game built with plain H
 If you have Python installed, run:
 
 ```bash
-cd c:\Users\bhava\GAME\WORD_SEARCH
+cd c:\Users\WORD_SEARCH
 python -m http.server 8000
 ```
 
