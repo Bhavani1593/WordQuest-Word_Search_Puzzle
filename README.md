@@ -4,7 +4,7 @@ WordQuest is a polished browser-based word search puzzle game built with plain H
 
 ## Features
 
-- Three difficulty modes: Easy, Medium, Hard
+- Three modes: Easy, Medium, Hard
 - Dynamic word search grid with hidden words
 - Word list panel showing found and remaining words
 - Level completion modal displaying score, time, and coin rewards
@@ -13,6 +13,12 @@ WordQuest is a polished browser-based word search puzzle game built with plain H
 - Responsive, modern UI with animated overlays, buttons, and particle effects
 - Local storage save support for coins, score, streaks, and progress
 - Built with no external libraries
+
+## Levels
+
+-EASY — 8*8 ( Short Words)
+-MEDIUM — 10*10 ( Mixed Words)
+-Hard — 12*12 ( Long Words)
 
 ## Files
 
